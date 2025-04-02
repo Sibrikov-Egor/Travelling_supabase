@@ -84,43 +84,7 @@ fun ListItem(navController: NavController) {
                         )
                     }
                 }
-//        Card(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(10.dp),
-//            shape = RoundedCornerShape(15.dp),
-//
-//            )  {
-//        Image(
-//            painter = painterResource(id = R.drawable.logo),
-//            contentDescription = "logo",
-//            contentScale = ContentScale.Crop,
-//            modifier = Modifier
-//                .padding(5.dp)
-//                .size(64.dp)
-//                .clip(CircleShape)
-//
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "Горы",
-//            color = Color.Black,
-//            fontWeight = FontWeight.Bold,
-//            fontSize = 20.sp
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//        Text(
-//            text = "Описание",
-//            color = Color.Gray,
-//            fontSize = 16.sp
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//        Text(
-//            text = "1000 рублей",
-//            color = Color.Blue,
-//            fontWeight = FontWeight.Bold,
-//            fontSize = 18.sp
-//        )
+
             }}
     }}
 
