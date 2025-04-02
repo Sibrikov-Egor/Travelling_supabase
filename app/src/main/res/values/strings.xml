@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Travelling</string>
+    <string name="enter">Введите имя пользователя</string>
+    <string name="enter_email">Введите почту</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="login">Войти</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="already_have_acc">Есть аккаунт? Войти</string>
+</resources>
