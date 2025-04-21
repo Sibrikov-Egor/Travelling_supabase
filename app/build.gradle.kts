@@ -61,13 +61,14 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.webkit)
     implementation(libs.androidx.ui.test.android)
-    implementation(platform("io.github.jan-tennert.supabase:bom:3.1.3"))
-    implementation("io.github.jan-tennert.supabase:postgrest-kt")
-    implementation("io.ktor:ktor-client-android:3.1.1")
-    implementation(libs.androidx.datastore.core.android)
-    implementation(libs.storage.kt)
+    implementation(libs.androidx.foundation.android)
+    implementation(libs.androidx.foundation.android)
+
+
+
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -76,4 +77,26 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+
+
+    implementation(platform(libs.bom))
+    implementation(libs.postgrest.kt)
+    implementation(libs.auth.kt)
+    implementation(libs.realtime.kt)
+    implementation (libs.storage.kt)
+
+    implementation(libs.ktor.client.android)
+
+
+    implementation (libs.androidx.navigation.compose)
+
+
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+
+    implementation (libs.androidx.runtime.livedata)
+
+
+    implementation(libs.coil.compose)
 }
