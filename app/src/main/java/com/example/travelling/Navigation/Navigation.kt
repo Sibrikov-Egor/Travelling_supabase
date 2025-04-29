@@ -2,14 +2,20 @@ package com.example.travelling.Navigation
 
 import androidx.compose.material3.ListItem
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.travelling.Navigation.NavigationRoutes.SozdatelScreen
+import com.example.travelling.Screen.InterfaceScreen
 import com.example.travelling.Screen.SIGNUP
 
 
 import com.example.travelling.Screen.SignInScreen
+import com.example.travelling.Screen.SozdatelScreen
 import com.example.travelling.SplashScreen.Splash
+
 
 object NavigationRoutes {
     const val SignInScreen = "signin"
@@ -17,6 +23,8 @@ object NavigationRoutes {
     const val SIGNUP = "signup"
     const val MAIN = "main"
     const val ListItem = "ListItem"
+    const val  InterfaceScreen = "InterfaceScreen"
+    const val  SozdatelScreen = "SozdatelScreen"
 
 }
 @Composable
@@ -43,6 +51,19 @@ fun Navigate(){
             com.example.travelling.Item.ListItem(navController)
         }
 
+        composable(NavigationRoutes.SozdatelScreen) {
+            SozdatelScreen(navController)
+        }
+        composable(NavigationRoutes.InterfaceScreen + "/{id}",
+            arguments = listOf(navArgument("id"){
+                type = NavType.StringType
+            })
+        ){
+            val id = it.arguments?.getString("id")
 
+            if(id != null){
+                InterfaceScreen(navController, id)
+            }
+        }
     }
 }

@@ -52,7 +52,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -65,11 +64,7 @@ dependencies {
     implementation(libs.androidx.ui.test.android)
     implementation(libs.androidx.foundation.android)
     implementation(libs.androidx.foundation.android)
-
-
-
-
-
+    implementation(libs.androidx.foundation.layout.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -79,24 +74,24 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
 
-
+    //Supabase
     implementation(platform(libs.bom))
     implementation(libs.postgrest.kt)
     implementation(libs.auth.kt)
     implementation(libs.realtime.kt)
     implementation (libs.storage.kt)
-
+    //Ktor
     implementation(libs.ktor.client.android)
 
-
+    //Navigation
     implementation (libs.androidx.navigation.compose)
 
-
+    //ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-
+    //LiveData
     implementation (libs.androidx.runtime.livedata)
 
-
+    //Coil
     implementation(libs.coil.compose)
 }

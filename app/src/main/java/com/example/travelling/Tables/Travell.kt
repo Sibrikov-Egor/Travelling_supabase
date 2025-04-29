@@ -1,13 +1,18 @@
 package com.example.travelling.Tables
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Travells(
+data class Travelling(
     val id: String,
     val name: String,
     val description: String,
+    @SerialName("category_id")
     val categoryId: String,
-    val image: String
+    @SerialName("url")
+    val image: String,
+    val Country: String = "",
+    val Sozdatel: String = ""
 )

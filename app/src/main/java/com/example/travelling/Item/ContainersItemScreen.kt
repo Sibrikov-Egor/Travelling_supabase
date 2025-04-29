@@ -1,6 +1,7 @@
 package com.example.travelling.Item
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -30,6 +31,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -45,23 +47,37 @@ fun TextFieldSearchItemScreen(
 ) {
     TextField(
         value = txt,
-        onValueChange = {onValueChange(it)},
+        onValueChange = onValueChange,
         colors = TextFieldDefaults.colors(
             unfocusedIndicatorColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
-            unfocusedContainerColor = Color.White,
-            focusedContainerColor = Color.White,
-            cursorColor = Color(0xff9b2d30),
-            unfocusedTextColor = Color(0xff9b2d30),
-            focusedTextColor = Color(0xff9b2d30)
+            unfocusedContainerColor = Color(0xFFF5F0FF),
+            focusedContainerColor = Color(0xFFF5F0FF),
+            cursorColor = Color(0xFF7A6A9C),
+            unfocusedTextColor = Color(0xFF5E4B8B),
+            focusedTextColor = Color(0xFF3A2C5A)
         ),
         label = {
-            Text(text = label, color = Color(0xff9b2d30))
+            Text(
+                text = label,
+                color = Color(0xFF7A6A9C),
+                fontSize = 14.sp
+            )
         },
         modifier = Modifier
             .fillMaxWidth()
-            .border(2.dp, Color(0xff9b2d30), RoundedCornerShape(0.dp)),
-        maxLines = 1
+            .background(
+                color = Color(0xFFF5F0FF),
+                shape = RoundedCornerShape(12.dp)
+            )
+            .border(
+                width = 1.dp,
+                color = Color(0xFFD9D0EB),
+                shape = RoundedCornerShape(12.dp)
+            ),
+        shape = RoundedCornerShape(12.dp),
+        singleLine = true,
+        textStyle = TextStyle(fontSize = 16.sp)
     )
 }
 
@@ -71,7 +87,7 @@ fun CatregoriesButton(typeCategories: Categories?, onClick: () -> Unit){
         modifier = Modifier.
         border(
             width = 2.dp,
-            color = Color(0xff9b2d30),
+            color = Color(0xFF625b71),
             shape = RoundedCornerShape(0.dp)
         )
             .clickable(onClick = onClick,
@@ -81,26 +97,92 @@ fun CatregoriesButton(typeCategories: Categories?, onClick: () -> Unit){
             .width(100.dp),
         contentAlignment = Alignment.Center,
     ){
-        Text(text = typeCategories?.name ?: "", color = Color(0xff9b2d30), textAlign = TextAlign.Center)
+        Text(text = typeCategories?.name ?: "", color = Color(0xFF6650a4), textAlign = TextAlign.Center)
     }
 }
 
 @Composable
-fun AllCatregoriesButton(onClick: () -> Unit){
+fun CategoriesButton(
+    typeCategories: Categories?,
+    onClick: () -> Unit
+) {
     Box(
-        modifier = Modifier.
-        border(
-            width = 2.dp,
-            color = Color(0xff9b2d30),
-            shape = RoundedCornerShape(0.dp)
-        )
-            .clickable(onClick = onClick,
+        modifier = Modifier
+            .padding(horizontal = 5.dp)
+            .border(
+                width = 2.dp,
+                color = Color(0xFF7251AB),
+                shape = RoundedCornerShape(8.dp)
+            )
+            .clickable(
+                onClick = onClick,
                 indication = null,
-                interactionSource = remember { MutableInteractionSource() })
+                interactionSource = remember { MutableInteractionSource() }
+            )
             .padding(10.dp)
             .width(100.dp),
-        contentAlignment = Alignment.Center,
-    ){
-        Text(text = "Все")
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = typeCategories?.name ?: "",
+            color = Color(0xFF7952EE),
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+fun InterfaceButton(onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .width(300.dp)
+            .height(50.dp)
+            .background(
+                color = Color(0xFF8056C5),
+                shape = RoundedCornerShape(4.dp)
+            )
+            .border(
+                width = 2.dp,
+                color = Color(0xFF795AE7),
+                shape = RoundedCornerShape(4.dp)
+            )
+            .clickable(onClick = onClick)
+            .padding(10.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = "Подробнее",
+            color = Color.White,
+            fontWeight = FontWeight.Bold,
+            fontSize = 25.sp
+        )
+    }
+}
+
+@Composable
+fun SozdatelButton(onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .width(300.dp)
+            .height(50.dp)
+            .background(
+                color = Color(0xFF4E3C9D),
+                shape = RoundedCornerShape(4.dp)
+            )
+            .border(
+                width = 2.dp,
+                color = Color(0xFF6855CE),
+                shape = RoundedCornerShape(4.dp)
+            )
+            .clickable(onClick = onClick)
+            .padding(10.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = "Создать",
+            color = Color.White,
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp
+        )
     }
 }

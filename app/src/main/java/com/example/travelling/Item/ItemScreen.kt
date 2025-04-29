@@ -38,15 +38,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.travelling.Navigation.NavigationRoutes
 import com.example.travelling.R
 import com.example.travelling.State.ResultDataClass
+import com.example.travelling.Tables.Travelling
 import com.example.travelling.ViewModel.ItemView
 
 
 @Composable
 fun ListItem(navController: NavController, itemview: ItemView = viewModel()) {
     val timeState by itemview.resultDataClass.collectAsState()
-    val travells = itemview.games.observeAsState(emptyList())
+    val travelling = itemview.travelling.observeAsState(emptyList())
     val categories = itemview.categories.observeAsState(emptyList())
     val txtSearch = remember { mutableStateOf("") }
     val CategorySelect = remember { mutableStateOf("") }
@@ -72,7 +74,7 @@ fun ListItem(navController: NavController, itemview: ItemView = viewModel()) {
                 Box(
                     modifier = Modifier.size(100.dp)
                 ) {
-                    LinearProgressIndicator(color = Color(0xff9b2d30))
+                    LinearProgressIndicator(color = Color(0xFF7961C9))
                 }
             }
 
@@ -90,9 +92,15 @@ fun ListItem(navController: NavController, itemview: ItemView = viewModel()) {
                         )
                     }
                 }
+                SozdatelButton(onClick = {
+                    navController.navigate(NavigationRoutes.SozdatelScreen)
+                })
                 LazyColumn {
-                    items(travells.value) { it ->
-                        TravellCard(travells = it)
+                    items(travelling.value) { it ->
+                        TravellCard(travelling = it)
+                        InterfaceButton(onClick = {
+                            navController.navigate(NavigationRoutes.InterfaceScreen + "/" + it.id)
+                        })
                     }
                 }
             }

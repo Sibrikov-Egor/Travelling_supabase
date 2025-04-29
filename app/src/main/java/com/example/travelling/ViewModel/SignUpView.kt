@@ -3,11 +3,11 @@ package com.example.travelling.ViewModel
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.travelling.Item.Profile
 import com.example.travelling.State.ResultDataClass
 import com.example.travelling.State.SignUpState
 import com.example.travelling.Supabase.Constant
 import com.example.travelling.Supabase.Constant.supabase
+import com.example.travelling.Tables.Profile
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.exception.AuthRestException
 import io.github.jan.supabase.auth.providers.builtin.Email
@@ -38,8 +38,16 @@ class SignUpView : ViewModel(){
                             email = _uiDataClass.value.email
                             password = _uiDataClass.value.password
                         }
-
-
+                        val id_user = Constant.supabase.auth.currentUserOrNull()
+                        if (id_user != null) {
+                            val _profile = Profile(
+                                id_user.id,
+                                _uiDataClass.value.email,
+                                _uiDataClass.value.password
+                            )
+                            supabase.from(schema = "public", table = "User")
+                                .insert(_profile)
+                        }
                         _resultDataClass.value = ResultDataClass.Success("Нет ошибок")
                     }
                     catch (ex : AuthRestException){

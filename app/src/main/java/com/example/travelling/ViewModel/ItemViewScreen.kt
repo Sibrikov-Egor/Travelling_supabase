@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.travelling.State.ResultDataClass
 import com.example.travelling.Supabase.Constant.supabase
 import com.example.travelling.Tables.Categories
-import com.example.travelling.Tables.Travells
+import com.example.travelling.Tables.Travelling
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,26 +18,27 @@ class ItemView : ViewModel(){
     private val _resultDataClass = MutableStateFlow<ResultDataClass>(ResultDataClass.Loading)
     val resultDataClass: StateFlow<ResultDataClass> = _resultDataClass.asStateFlow()
 
-    private val _travells = MutableLiveData<List<Travells>>()
-    val games: LiveData<List<Travells>> get() = _travells
+    private val _travelling = MutableLiveData<List<Travelling>>()
+    val travelling: LiveData<List<Travelling>> get() = _travelling
 
     private val _categories = MutableLiveData<List<Categories>>()
     val categories: LiveData<List<Categories>> get() = _categories
 
-    private var filterTravells: List<Travells> = listOf()
+    private var filterTravelling: List<Travelling> = listOf()
 
     init {
-        loadTravell()
+        loadTravelling()
         loadCategoriesTravell()
+
     }
 
-    private fun loadTravell(){
+    private fun loadTravelling(){
         _resultDataClass.value = ResultDataClass.Loading
         viewModelScope.launch {
             try{
-                filterTravells = supabase.postgrest.from("Travells").select().decodeList<Travells>()
-                _travells.value = filterTravells
-                _resultDataClass.value = ResultDataClass.Success("Все выполнилось отлично")
+                filterTravelling = supabase.postgrest.from("Travelling").select().decodeList<Travelling>()
+                _travelling.value = filterTravelling
+                _resultDataClass.value = ResultDataClass.Success("Все выполнилось")
             }
             catch (ex: Exception){
                 _resultDataClass.value = ResultDataClass.Error(ex.message + "Ошибка")
@@ -48,27 +49,29 @@ class ItemView : ViewModel(){
     private fun loadCategoriesTravell(){
         viewModelScope.launch {
             try{
-                _categories.value = supabase.postgrest.from("GenresOfTravells").select().decodeList<Categories>()
+                _categories.value = supabase.postgrest.from("Categories").select().decodeList<Categories>()
             }
             catch (ex: Exception){
-                _resultDataClass.value = ResultDataClass.Error(ex.message + "Ошибка")
+                _resultDataClass.value = ResultDataClass.Error(ex.message + "Ошибка12421")
             }
         }
     }
 
-    fun filterListTravells(strFilt: String, categoryId: String?){
-        val filteredGames = filterTravells.filter { travells ->
-            travells.name.contains(strFilt)
+    fun filterListTravells(strFilt: String, categoryId: String?) {
+        val filteredTravellingAll = filterTravelling.filter { travelling ->
+            travelling.name.contains(strFilt)
         }
-        val filtredTravellsCategories = filterTravells.filter{ travells ->
-           travells.categoryId == categoryId
+        val filteredTravelling = filterTravelling.filter { travelling ->
+            travelling.name.contains(strFilt)
         }
-        if (categoryId == ""){
-            _travells.value = filteredGames
+        val filteredTravellingCategories = filterTravelling.filter { travelling ->
+            travelling.categoryId == categoryId
         }
-        else
-        {
-            _travells.value = filtredTravellsCategories
+        if (categoryId != "" && strFilt != "") {
+            _travelling.value = filteredTravellingAll
+        } else if (categoryId != "" && strFilt == "") {
+            _travelling.value = filteredTravellingCategories
+        } else if (categoryId == "" && strFilt != "") {
+            _travelling.value = filterTravelling
         }
-    }
-}
+    }}
